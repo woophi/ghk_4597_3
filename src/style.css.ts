@@ -15,7 +15,7 @@ const container = style({
   display: 'flex',
   padding: '1rem',
   flexDirection: 'column',
-  gap: '1rem',
+  gap: '24px',
 });
 
 const banner = style({
@@ -32,36 +32,13 @@ const swSlide = style({
   width: 'min-content',
 });
 
-const btmRow = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '1rem',
-  justifyContent: 'space-between',
-  padding: '0 4px',
-});
-const btmRowCalc = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '1rem',
-  justifyContent: 'space-between',
-});
-
-export const btmContent = style({
-  padding: 0,
-});
-
-const row = style({
-  display: 'flex',
-  gap: '1rem',
-});
-
 const box = style({
-  backgroundColor: '#F2F3F5',
-  borderRadius: '1rem',
-  padding: '20px 1rem',
+  backgroundColor: '#E9F7D9',
+  borderRadius: '12px',
+  padding: '.5rem 1rem',
   display: 'flex',
-  flexDirection: 'column',
-  gap: '12px',
+  alignItems: 'center',
+  gap: '1rem',
 });
 
 export const appSt = {
@@ -69,9 +46,5 @@ export const appSt = {
   container,
   banner,
   swSlide,
-  btmRow,
-  btmContent,
-  row,
   box,
-  btmRowCalc,
 };
