@@ -4,12 +4,13 @@ import { Input } from '@alfalab/core-components/input';
 import { Tag } from '@alfalab/core-components/tag';
 import { Typography } from '@alfalab/core-components/typography';
 import { ChevronRightMIcon } from '@alfalab/icons-glyph/ChevronRightMIcon';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import rubIcon from './assets/rub.png';
 import { LS, LSKeys } from './ls';
 import { appSt } from './style.css';
 import { ThxSpinner } from './thx/ThxLayout';
+import { sendDataToGA } from './utils/events';
 
 const min = 2000;
 const max = 3_000_000;
@@ -26,6 +27,12 @@ export const App = () => {
   const [sum, setSum] = useState<string>('');
   const [thxShow, setThx] = useState(LS.getItem(LSKeys.ShowThx, false));
 
+  useEffect(() => {
+    if (!LS.getItem(LSKeys.UserId, null)) {
+      LS.setItem(LSKeys.UserId, Date.now());
+    }
+  }, []);
+
   const submit = () => {
     if (!sum) {
       setError('Введите сумму взноса');
@@ -33,9 +40,15 @@ export const App = () => {
     }
 
     setLoading(true);
-    // LS.setItem(LSKeys.ShowThx, true);
-    setThx(true);
-    setLoading(false);
+    sendDataToGA({
+      auto: 'None',
+      sum: Number(sum),
+      id: LS.getItem(LSKeys.UserId, 0) as number,
+    }).then(() => {
+      // LS.setItem(LSKeys.ShowThx, true);
+      setThx(true);
+      setLoading(false);
+    });
   };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +72,7 @@ export const App = () => {
   };
 
   const goToSdui = () => {
+    window.gtag('event', 'inf_4597_var3');
     window.location.replace(sduiLink);
   };
 
