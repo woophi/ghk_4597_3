@@ -24,7 +24,7 @@ const sduiLink =
 export const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [sum, setSum] = useState<string>('');
+  const [sum, setSum] = useState<string>('2000');
   const [thxShow, setThx] = useState(LS.getItem(LSKeys.ShowThx, false));
 
   useEffect(() => {
